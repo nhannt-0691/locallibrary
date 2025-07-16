@@ -1,0 +1,63 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% trans "Book Haven" %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% block head %}
+        {% spaceless %}
+            <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        {% endspaceless %}
+    {% endblock %}
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <h1>{% trans "Book Haven" %}</h1>
+            </div>
+            <nav>
+                <a href="{% url 'catalog:index' %}" class="nav-link">
+                    <i class="fas fa-home"></i> {% trans "Home" %}
+                </a>
+                
+                <div class="language-selector">
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ request.path }}">
+                        <select name="language" id="language" onchange="this.form.submit()" class="lang-select">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% for lang_code, lang_name in LANGUAGES %}
+                                <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                                    {{ lang_name|upper }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>{% trans "© 2023 Book Haven - Your Literary Sanctuary" %}</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
