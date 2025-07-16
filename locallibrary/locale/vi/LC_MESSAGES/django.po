@@ -49,6 +49,12 @@ msgstr "Thiên Đường Sách"
 msgid "Home"
 msgstr "Trang chủ"
 
+msgid "All books"
+msgstr "Danh sách sách"
+
+msgid "All authors"
+msgstr "Danh sách tác giả"
+
 msgid "Book Haven - Your Literary Sanctuary"
 msgstr "Thiên Đường Sách - Nơi ẩn náu văn học của bạn"
 
@@ -79,12 +85,72 @@ msgstr "Có sẵn"
 msgid "Books"
 msgstr "Sách"
 
-msgid "Copies"
-msgstr "Bản sao"
-
 msgid "English"
 msgstr "Tiếng Anh"
 
 msgid "Vietnamese"
 msgstr "Tiếng Việt" 
+
+msgid "Book List"
+msgstr "Danh sách sách" 
+
+msgid "Copies"
+msgstr "Bản sao" 
+
+msgid "On_loan"
+msgstr "Đang được mượn" 
+
+msgid "Mantenance"
+msgstr "Bảo trì" 
+
+msgid "Available"
+msgstr "Có sẵn" 
+
+msgid "Reserved"
+msgstr "Đã đặt trước" 
+
+msgid "Author:"
+msgstr "Tác giả:"
+
+msgid "Summary:"
+msgstr "Tóm tắt:"
+
+msgid "ISBN:"
+msgstr "Mã ISBN:"
+
+msgid "Language:"
+msgstr "Ngôn ngữ:"
+
+msgid "Genre:"
+msgstr "Thể loại:"
+
+msgid "Due to be returned:"
+msgstr "Hạn trả:"
+
+msgid "Imprint:"
+msgstr "Nhà xuất bản:"
+
+msgid "Id:"
+msgstr "Mã:"
+
+msgid "No summary available."
+msgstr "Không có tóm tắt."
+
+msgid "No ISBN available."
+msgstr "Không có mã ISBN."
+
+msgid "No language specified."
+msgstr "Không có ngôn ngữ."
+
+msgid "No genres."
+msgstr "Không có thể loại."
+
+msgid "previous"
+msgstr "Trước"
+
+msgid "next"
+msgstr "Sau"
+
+msgid "Page %(page_num)s of %(total_pages)s."
+msgstr "Trang %(page_num)s trên %(total_pages)s."
 
