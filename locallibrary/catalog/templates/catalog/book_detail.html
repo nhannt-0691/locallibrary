@@ -1,0 +1,65 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Book Details - Book Haven" %}{% endblock %}
+
+{% block content %}
+    <div class="book-detail">
+        <h1>{% trans "Title:" %} {{ book.title }}</h1>
+        
+        <p><strong>{% trans "Author:" %}</strong> {{ book.author }}</p>
+                        
+        <p><strong>{% trans "Summary:" %}</strong>
+            {% if book.summary %}
+                {{ book.summary }}
+            {% else %}
+                <em>{% trans "No summary available." %}</em>
+            {% endif %}
+        </p>
+
+        <p><strong>{% trans "ISBN:" %}</strong>
+            {% if book.isbn %}
+                {{ book.isbn }}
+            {% else %}
+                <em>{% trans "No ISBN available." %}</em>
+            {% endif %}
+        </p>
+
+        <p><strong>{% trans "Language:" %}</strong>
+            {% if book.language %}
+                {{ book.language }}
+            {% else %}
+                <em>{% trans "No language specified." %}</em>
+            {% endif %}
+        </p>
+
+        <p><strong>{% trans "Genre:" %}</strong>
+            {% if book.genre.all %}
+                {{ book.genre.all|join:", " }}
+            {% else %}
+                <em>{% trans "No genres." %}</em>
+            {% endif %}
+        </p>
+        
+        <div class="copies-section">
+            <h4>{% trans "Copies" %}</h4>
+            
+            {% for copy in book_instances %}
+                <hr>
+                <p class="{% if copy.status == LOAN_STATUS_AVAILABLE %}text-success
+                           {% elif copy.status == LOAN_STATUS_MAINTENANCE %}text-danger
+                           {% else %}text-warning{% endif %}">
+                    {{ copy.get_status_display }}
+                </p>
+                
+                {% if copy.status != LOAN_STATUS_AVAILABLE %}
+                    <p><strong>{% trans "Due to be returned:" %}</strong> {{ copy.due_back|date:"d/m/Y" }}</p>
+                {% endif %}
+                
+                <p><strong>{% trans "Imprint:" %}</strong> {{ copy.imprint }}</p>
+                <p class="text-muted"><strong>{% trans "Id:" %}</strong> {{ copy.id }}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

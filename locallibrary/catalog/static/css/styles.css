@@ -331,3 +331,89 @@ main {
     }
 }
 
+/* Book List Styles */
+.book-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.book-list li {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.book-list li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.book-list a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.book-list a:hover {
+    text-decoration: underline;
+}
+
+/* Book Detail Styles */
+.book-detail {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.copies-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.text-success {
+    color: var(--success-color);
+}
+
+.text-danger {
+    color: var(--danger-color);
+}
+
+.text-warning {
+    color: var(--warning-color);
+}
+
+/* Pagination Styles */
+.pagination {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.page-links {
+    display: inline-block;
+}
+
+.page-links a {
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    margin: 0 0.25rem;
+    border-radius: 4px;
+}
+
+.page-links a:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.page-current {
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+}
+

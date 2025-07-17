@@ -25,6 +25,12 @@
                 <a href="{% url 'catalog:index' %}" class="nav-link">
                     <i class="fas fa-home"></i> {% trans "Home" %}
                 </a>
+                <a href="{% url 'catalog:books' %}" class="nav-link">
+                    <i class="fas fa-book"></i> {% trans "All books" %}
+                </a>
+                <a href="{% url 'catalog:authors' %}" class="nav-link">
+                    <i class="fas fa-user-pen"></i> {% trans "All authors" %}
+                </a>
                 
                 <div class="language-selector">
                     <form action="{% url 'set_language' %}" method="post">
@@ -46,6 +52,26 @@
     </header>
     <main>
         {% block content %}
+        {% endblock %}
+        
+        {% block pagination %}
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">{% trans "previous" %}</a>
+                        {% endif %}
+                        <span class="page-current">
+                            {% blocktrans with page_num=page_obj.number total_pages=page_obj.paginator.num_pages %}
+                                Page {{ page_num }} of {{ total_pages }}.
+                            {% endblocktrans %}
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">{% trans "next" %}</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
         {% endblock %}
     </main>
     <footer class="main-footer">

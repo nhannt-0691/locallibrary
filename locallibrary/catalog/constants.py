@@ -13,3 +13,6 @@ class LoanStatus(Enum):
 
 DEFAULT_IMPRINT = 'DEFAULT_IMPRINT'
 
+# catalog/constants.py
+
+BOOKS_PER_PAGE = 10

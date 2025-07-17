@@ -1,0 +1,47 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+{% load querystring %}
+
+{% block title %}{% trans "All Books - Book Haven" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Book List" %}</h1>
+    
+    {% if book_list %}
+        <ul class="book-list">
+            {% for book in book_list %}
+                <li>
+                    <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> 
+                    ({{ book.author }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>{% trans "There are no books in the library." %}</p>
+    {% endif %}
+    
+    {% block pagination %}
+        {% if is_paginated %}
+            <div class="pagination">
+                <span class="page-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?{% query_transform page=page_obj.previous_page_number %}">
+                            {% trans "previous" %}
+                        </a>
+                    {% endif %}
+                    <span class="page-current">
+                        {% blocktrans with page_num=page_obj.number total_pages=page_obj.paginator.num_pages %}
+                            Page {{ page_num }} of {{ total_pages }}.
+                        {% endblocktrans %}
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="?{% query_transform page=page_obj.next_page_number %}">
+                            {% trans "next" %}
+                        </a>
+                    {% endif %}
+                </span>
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}
+
