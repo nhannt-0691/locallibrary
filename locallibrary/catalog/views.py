@@ -4,6 +4,7 @@ from django.views import generic
 from catalog.models import Book, Author, BookInstance, Genre
 from catalog.constants import LoanStatus
 from catalog.constants import BOOKS_PER_PAGE 
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
     num_books = Book.objects.count()
@@ -48,11 +49,22 @@ class BookDetailView(generic.DetailView):
     
 class AuthorListView(generic.ListView):
     model = Author
-    paginate_by = 10
+    paginate_by = BOOKS_PER_PAGE
     context_object_name = 'author_list'
     template_name = 'catalog/author_list.html'
 
 class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'catalog/author_detail.html'
+
+class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
+    model = BookInstance
+    template_name = 'catalog/bookinstance_list_borrowed_user.html'
+    paginate_by = BOOKS_PER_PAGE
+    
+    def get_queryset(self):
+        return BookInstance.objects.filter(
+            borrower=self.request.user,
+            status__exact=LoanStatus.ON_LOAN.value
+        ).order_by('due_back')
 
