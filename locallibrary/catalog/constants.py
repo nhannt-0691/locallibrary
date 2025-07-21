@@ -16,3 +16,10 @@ DEFAULT_IMPRINT = 'DEFAULT_IMPRINT'
 # catalog/constants.py
 
 BOOKS_PER_PAGE = 10
+
+DEFAULT_LOAN_PERIOD_WEEKS = {
+    'default': 3,
+    'max': 4
+}
+LOAN_STATUS_ON_LOAN = 'o'  
+
