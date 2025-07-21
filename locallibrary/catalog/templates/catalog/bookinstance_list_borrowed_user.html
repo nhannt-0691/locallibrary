@@ -2,18 +2,28 @@
 {% load i18n %}
 
 {% block content %}
-<h1>{% trans "Borrowed books" %}</h1>
-{% if bookinstance_list %}
-<ul>
-  {% for bookinst in bookinstance_list %}
-  <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
-    <a href="{% url 'book-detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a>
-    ({% trans "Due" %} {{ bookinst.due_back }})
-  </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>{% trans "There are no books borrowed." %}</p>
-{% endif %}
+<div class="borrowed-books">
+    <h1>{% trans "My Borrowed Books" %}</h1>
+    
+    {% if bookinstance_list %}
+    <div class="book-list">
+        {% for bookinst in bookinstance_list %}
+        <div class="book-item {% if bookinst.is_overdue %}overdue{% endif %}">
+            <a href="{% url 'catalog:book-detail' bookinst.book.pk %}">
+                {{ bookinst.book.title }}
+            </a>
+            <span class="due-date">
+                ({% trans "Due" %} {{ bookinst.due_back|date:"d/m/Y" }})
+            </span>
+            <a href="{% url 'catalog:book-renew' bookinst.id %}" class="renew-btn">
+                {% trans "Renew" %}
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>{% trans "You have no books borrowed." %}</p>
+    {% endif %}
+</div>
 {% endblock %}
 

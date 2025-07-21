@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Borrow Book" %}{% endblock %}
+
+{% block content %}
+<div class="book-borrow-form">
+    <h1>{% trans "Borrow:" %} {{ book_instance.book.title }}</h1>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.due_back.label_tag }}
+            {{ form.due_back }}
+            {% if form.due_back.errors %}
+                <div class="error-message">
+                    {{ form.due_back.errors }}
+                </div>
+            {% endif %}
+            <small class="form-text text-muted">{{ form.due_back.help_text }}</small>
+        </div>
+        <button type="submit" class="btn btn-primary">{% trans "Borrow" %}</button>
+    </form>
+</div>
+{% endblock %}
+

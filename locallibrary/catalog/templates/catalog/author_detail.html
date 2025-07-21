@@ -1,14 +1,15 @@
 {% extends "base_generic.html" %}
+{% load i18n %}
 
-{% block title %}Author Detail{% endblock %}
+{% block title %}{% trans "Author Detail" %}{% endblock %}
 
 {% block content %}
   <h1>{{ author.first_name }} {{ author.last_name }}</h1>
   {% if author.date_of_birth %}
-    <p>Date of Birth: {{ author.date_of_birth }}</p>
+    <p>{% trans "Date of Birth" %}: {{ author.date_of_birth }}</p>
   {% endif %}
   {% if author.date_of_death %}
-    <p>Date of Death: {{ author.date_of_death }}</p>
+    <p>{% trans "Date of Death" %}: {{ author.date_of_death }}</p>
   {% endif %}
 {% endblock %}
 
