@@ -31,7 +31,7 @@ class Author(models.Model):
         return f'{self.last_name}, {self.first_name}'
 
     def get_absolute_url(self):
-        return reverse('author-detail', args=[str(self.id)])
+        return reverse('catalog:author-detail', kwargs={'pk': self.id})
 
 class Book(models.Model):
     title = models.CharField(max_length=MAX_LENGTH_NAME)

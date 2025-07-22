@@ -26,16 +26,20 @@ class BorrowBookForm(forms.Form):
 
 class RenewBookForm(forms.Form):
     renewal_date = forms.DateField(
-        label=_("Renewal date"),
+        label=_("Renewal date"),  # Đảm bảo label này khớp với test
         help_text=_("Enter a date between now and 4 weeks (default 3)."),
         widget=forms.DateInput(attrs={'type': 'date'})
     )
 
     def clean_renewal_date(self):
         data = self.cleaned_data['renewal_date']
-        if data < datetime.date.today():
-            raise forms.ValidationError(_('Invalid date - in past'))
-        if data > datetime.date.today() + datetime.timedelta(weeks=4):
-            raise forms.ValidationError(_('Invalid date - more than 4 weeks ahead'))
+        today = datetime.date.today()
+        
+        if data < today:
+            raise forms.ValidationError(_('Invalid date - renewal in past'))
+        
+        if data > today + datetime.timedelta(weeks=4):
+            raise forms.ValidationError(_('Invalid date - renewal more than 4 weeks ahead'))
+        
         return data
 
